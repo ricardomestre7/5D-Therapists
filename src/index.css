@@ -1,0 +1,230 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 224 71% 4%; /* Azul-escuro profundo, quase preto */
+    --foreground: 210 40% 98%; /* Texto claro */
+
+    --card: 224 40% 10%; /* Card um pouco mais escuro que o anterior, mais próximo do fundo */
+    --card-foreground: 210 40% 96%;
+
+    --popover: 224 71% 6%; 
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 260 85% 65%; /* Roxo vibrante principal */
+    --primary-foreground: 210 20% 98%; 
+
+    --secondary: 330 80% 60%; /* Rosa/Magenta vibrante para gradientes e destaques */
+    --secondary-foreground: 330 20% 98%;
+
+    --muted: 224 30% 20%; 
+    --muted-foreground: 224 15% 65%; 
+
+    --accent: 280 75% 70%; 
+    --accent-foreground: 210 20% 98%;
+
+    --destructive: 0 70% 55%; 
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 224 30% 25%; 
+    --input: 224 30% 18%; 
+    --ring: 270 80% 70%; 
+
+    --radius: 0.75rem; 
+    
+    --health-green-light: 145 58% 20%; 
+    --health-green: 145 63% 60%; 
+    --health-green-dark: 145 63% 80%; 
+    --health-green-foreground: 145 63% 95%; 
+
+    --divinity-gold-light: 45 100% 20%; 
+    --divinity-gold: 45 100% 60%; 
+    --divinity-gold-dark: 45 100% 80%; 
+    --divinity-gold-foreground: 45 100% 95%; 
+  }
+ 
+  .light { 
+    --background: 200 20% 98%; 
+    --foreground: 224 71% 10%; 
+
+    --card: 0 0% 100%;
+    --card-foreground: 224 71% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71% 10%;
+
+    --primary: 260 80% 55%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 330 75% 50%;
+    --secondary-foreground: 210 40% 98%;
+    
+    --muted: 220 30% 94%;
+    --muted-foreground: 220 15% 45%;
+
+    --accent: 270 70% 60%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 75% 50%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 25% 88%;
+    --input: 220 25% 92%;
+    --ring: 260 85% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: 'Inter', sans-serif; 
+  }
+  
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background) / 0.7);
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    border-radius: 10px;
+    border: 2px solid hsl(var(--background) / 0.7);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.9), hsl(var(--secondary) / 0.9));
+  }
+}
+
+/* Padrão de fundo para páginas de autenticação (Login, Signup) */
+.auth-page-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; 
+    background-color: hsl(var(--background)); 
+    background-image: 
+        linear-gradient(30deg, hsl(var(--primary) / 0.08) 12%, transparent 12.5%, transparent 87%, hsl(var(--primary) / 0.08) 87.5%, hsl(var(--primary) / 0.08)),
+        linear-gradient(150deg, hsl(var(--primary) / 0.08) 12%, transparent 12.5%, transparent 87%, hsl(var(--primary) / 0.08) 87.5%, hsl(var(--primary) / 0.08)),
+        linear-gradient(30deg, hsl(var(--primary) / 0.08) 12%, transparent 12.5%, transparent 87%, hsl(var(--primary) / 0.08) 87.5%, hsl(var(--primary) / 0.08)),
+        linear-gradient(150deg, hsl(var(--primary) / 0.08) 12%, transparent 12.5%, transparent 87%, hsl(var(--primary) / 0.08) 87.5%, hsl(var(--primary) / 0.08)),
+        linear-gradient(60deg, hsl(var(--secondary) / 0.06) 25%, transparent 25.5%, transparent 75%, hsl(var(--secondary) / 0.06) 75%, hsl(var(--secondary) / 0.06)),
+        linear-gradient(60deg, hsl(var(--secondary) / 0.06) 25%, transparent 25.5%, transparent 75%, hsl(var(--secondary) / 0.06) 75%, hsl(var(--secondary) / 0.06));
+    background-size: 40px 70px, 40px 70px, 40px 70px, 40px 70px, 40px 70px, 40px 70px;
+    background-position: 0 0, 0 0, 20px 35px, 20px 35px, 0 0, 20px 35px;
+    animation: bg-pan 120s linear infinite; 
+}
+
+@keyframes bg-pan {
+  0% { background-position: 0 0, 0 0, 20px 35px, 20px 35px, 0 0, 20px 35px; }
+  100% { background-position: 400px 700px, 400px 700px, 420px 735px, 420px 735px, 400px 700px, 420px 735px; }
+}
+
+.light .auth-page-background {
+    background-image: 
+        linear-gradient(30deg, hsl(var(--primary) / 0.05) 12%, transparent 12.5%, transparent 87%, hsl(var(--primary) / 0.05) 87.5%, hsl(var(--primary) / 0.05)),
+        linear-gradient(150deg, hsl(var(--primary) / 0.05) 12%, transparent 12.5%, transparent 87%, hsl(var(--primary) / 0.05) 87.5%, hsl(var(--primary) / 0.05)),
+        linear-gradient(30deg, hsl(var(--primary) / 0.05) 12%, transparent 12.5%, transparent 87%, hsl(var(--primary) / 0.05) 87.5%, hsl(var(--primary) / 0.05)),
+        linear-gradient(150deg, hsl(var(--primary) / 0.05) 12%, transparent 12.5%, transparent 87%, hsl(var(--primary) / 0.05) 87.5%, hsl(var(--primary) / 0.05)),
+        linear-gradient(60deg, hsl(var(--secondary) / 0.03) 25%, transparent 25.5%, transparent 75%, hsl(var(--secondary) / 0.03) 75%, hsl(var(--secondary) / 0.03)),
+        linear-gradient(60deg, hsl(var(--secondary) / 0.03) 25%, transparent 25.5%, transparent 75%, hsl(var(--secondary) / 0.03) 75%, hsl(var(--secondary) / 0.03));
+}
+
+/* Padrão de fundo sutil para o conteúdo principal do app (dentro do AppLayout) */
+.quantum-subtle-pattern {
+  background-color: hsl(var(--background)); /* Garante que o fundo base seja aplicado */
+  background-image:
+    radial-gradient(hsl(var(--primary) / 0.03) 0.5px, transparent 0.5px), /* Pontos roxos bem sutis */
+    radial-gradient(hsl(var(--secondary) / 0.02) 0.5px, transparent 0.5px); /* Pontos rosas ainda mais sutis */
+  background-position: 0 0, 15px 15px; /* Deslocamento para os pontos rosas */
+  background-size: 30px 30px; /* Espaçamento dos pontos */
+  background-repeat: repeat;
+}
+
+.light .quantum-subtle-pattern {
+  background-image:
+    radial-gradient(hsl(var(--primary) / 0.02) 0.5px, transparent 0.5px),
+    radial-gradient(hsl(var(--secondary) / 0.01) 0.5px, transparent 0.5px);
+  background-position: 0 0, 12px 12px;
+  background-size: 24px 24px;
+}
+
+
+/* Estilo para cards com efeito de glassmorphism */
+.quantum-card {
+  background: hsl(var(--card) / 0.75); /* Fundo do card com transparência */
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid hsl(var(--border) / 0.25); /* Borda sutil */
+  box-shadow: 0 8px 32px 0 hsla(var(--primary) / 0.1); /* Sombra suave */
+  border-radius: var(--radius);
+}
+
+.dark .quantum-card {
+  background: hsl(var(--card) / 0.8); 
+  border: 1px solid hsl(var(--border) / 0.35);
+}
+
+.light .quantum-card { 
+  background: hsla(0, 0%, 100%, 0.7);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid hsla(220, 25%, 88%, 0.4); 
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+}
+
+
+/* Remove default focus outline and use ring utility from Tailwind/shadcn */
+*:focus {
+  outline: none;
+}
+*:focus-visible {
+  box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--ring));
+}
+
+/* Efeito de brilho para botões e elementos interativos */
+.quantum-glow {
+  @apply shadow-lg transition-all duration-300;
+}
+.quantum-glow:hover {
+  @apply shadow-[0_0_15px_hsl(var(--primary)/0.5),_0_0_30px_hsl(var(--secondary)/0.3)];
+}
+
+/* Animação de pulso para ícones ou indicadores */
+.quantum-pulse {
+  animation: quantum-pulse-animation 2s infinite;
+}
+@keyframes quantum-pulse-animation {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.1); }
+}
+
+/* Estilos para prosa dentro de AccordionContent ou similar */
+.prose-invert {
+  --tw-prose-body: hsl(var(--card-foreground) / 0.9);
+  --tw-prose-headings: hsl(var(--primary));
+  --tw-prose-lead: hsl(var(--muted-foreground));
+  --tw-prose-links: hsl(var(--primary));
+  --tw-prose-bold: hsl(var(--card-foreground));
+  --tw-prose-counters: hsl(var(--muted-foreground));
+  --tw-prose-bullets: hsl(var(--border));
+  --tw-prose-hr: hsl(var(--border));
+  --tw-prose-quotes: hsl(var(--primary));
+  --tw-prose-quote-borders: hsl(var(--border));
+  --tw-prose-captions: hsl(var(--muted-foreground));
+  --tw-prose-code: hsl(var(--primary));
+  --tw-prose-pre-code: hsl(var(--muted-foreground));
+  --tw-prose-pre-bg: hsl(var(--muted) / 0.5);
+  --tw-prose-th-borders: hsl(var(--border));
+  --tw-prose-td-borders: hsl(var(--border));
+}
